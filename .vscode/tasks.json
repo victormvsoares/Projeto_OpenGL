@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build opengl",
+      "type": "shell",
+      "command": "C:/msys64/mingw64/bin/g++.exe",
+      "args": [
+        "main.cpp",
+        "Window.cpp",
+        "-o",
+        "app",
+        "-I",
+        "C:/msys64/mingw64/include",
+        "-L",
+        "C:/msys64/mingw64/lib",
+        "-lglfw3",
+        "-lglew32",
+        "-lopengl32"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
