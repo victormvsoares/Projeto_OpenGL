@@ -3,6 +3,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <memory>
+
+
+class Scene;
 
 class Window
 {
@@ -15,12 +19,15 @@ class Window
     ~Window();
 
     inline bool shouldClose() const { return m_ShouldClose;}
+    inline void setScene(std::unique_ptr<Scene> scene){m_scene = std::move(scene);}
 
   private:
 
     GLFWwindow* m_Window;
 
     bool m_ShouldClose;
+
+    std::unique_ptr<Scene> m_scene = nullptr;
 
     static void errorCallbeck(int error, const char* description);
 };

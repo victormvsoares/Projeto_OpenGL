@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Scene.h"
 
 Window::Window(int width, int height, const char* title)
 {
@@ -62,11 +63,16 @@ void Window::update()
 
  glfwPollEvents();
 
+ if(m_scene)
+ {
+    m_scene->update();
+ }
+
  glfwSwapBuffers(m_Window);
 
  if (!m_ShouldClose)
  {
-    m_ShouldClose = glfwWindowShouldClose(m_Window);
+    m_ShouldClose = (glfwWindowShouldClose(m_Window) == GL_TRUE);
  }
 }
 
