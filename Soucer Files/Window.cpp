@@ -51,7 +51,7 @@ Window::Window(int width, int height, const char* title)
     std::cout << "Renderizador: " << renderer << std::endl;
     std::cout << "Versao do opengl suportada " << version << std::endl;
 
-    glClearColor(0.5f, 0.5f, 1, 0);
+    glClearColor(0.5f, 0.5f, 0.5f, 0);
 
     m_ShouldClose = false;
 }
