@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv)
 {
-    Window w(800, 600, "OpenGL Jenal");
+    Window w(800, 600, "OpenGL Janela");
 
     w.setScene(std::unique_ptr<Scene>(new MyScene()));
 

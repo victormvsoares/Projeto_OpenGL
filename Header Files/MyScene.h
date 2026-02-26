@@ -7,6 +7,12 @@ class MyScene:
 
 {
 
+  private:
+  
+    GLuint m_ShaderProgram;
+    GLuint m_VertexShader;
+    GLuint m_FragmentShader;
+
   public:
 
     MyScene();
