@@ -32,6 +32,11 @@ Window::Window(int width, int height, const char* title)
         return;
     }
 
+    glfwSetWindowUserPointer(m_Window, this);
+
+    glfwSetFramebufferSizeCallback(m_Window, Window::framebuffer_size_callback);
+
+    
     // Toena o contexto atual
 
     glfwMakeContextCurrent(m_Window);
@@ -42,6 +47,8 @@ Window::Window(int width, int height, const char* title)
     {
       std::cerr << "Erro ao criar a janela " << glewGetErrorString(glewInitErr) << std::endl;
     }
+
+     glViewport(0, 0, width, height);
 
     // Mostra dados do ambiente
 
@@ -85,4 +92,13 @@ void Window::errorCallbeck(int error, const char* description)
 
   std::cerr << "Errro " << error << ": " << description<< std::endl;
 
+}
+
+void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+    win->m_Width = width;
+    win->m_Height = height;
 }

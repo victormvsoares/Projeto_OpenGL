@@ -18,8 +18,15 @@ class Window
 
     ~Window();
 
+
     inline bool shouldClose() const { return m_ShouldClose;}
     inline void setScene(std::unique_ptr<Scene> scene){m_scene = std::move(scene);}
+
+    int m_Width;
+    int m_Height;
+
+    inline int getWidth() const { return m_Width; }
+    inline int getHeight() const { return m_Height; }
 
   private:
 
@@ -30,4 +37,6 @@ class Window
     std::unique_ptr<Scene> m_scene = nullptr;
 
     static void errorCallbeck(int error, const char* description);
+
+    static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 };

@@ -3,6 +3,7 @@
 #include <sstream>
 #include "Util.h"
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 GLint checkShaderCompilation(GLuint shader)
 {
@@ -28,7 +29,7 @@ GLint checkProgramLink(GLuint program)
   GLint success = 0;
   GLchar infolog[512];
 
-  glGetShaderiv(program, GL_LINK_STATUS, &success);
+  glGetProgramiv(program, GL_LINK_STATUS, &success);
 
   if ( !success)
   {
@@ -99,7 +100,7 @@ MyScene::MyScene()
 
   glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
-  glBufferData(GL_ARRAY_BUFFER,18 * sizeof(GL_FLOAT),m_Vertices,GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER,18 * sizeof(GLfloat),m_Vertices,GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,6 * sizeof(GLfloat),(GLvoid*)0);
   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,6 * sizeof(GLfloat),(GLvoid*)(3 * sizeof(GLfloat)));
@@ -113,16 +114,27 @@ MyScene::MyScene()
 
 void MyScene::update()
 {
-  // afeta o resultado final da tela
-
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glUseProgram(m_ShaderProgram);
 
+  // pegar tamanho da janela
+  int width, height;
+  glfwGetFramebufferSize(glfwGetCurrentContext(), &width, &height);
+
+  // calcular proporção
+  float aspect = (float)width / (float)height;
+
+  // pegar localização do uniform no shader
+  GLint aspectLocation = glGetUniformLocation(m_ShaderProgram, "aspect");
+
+  // enviar valor para o shader
+  glUniform1f(aspectLocation, aspect);
+
   glBindVertexArray(m_VAO);
   glDrawArrays(GL_TRIANGLES, 0, 3);
-
   glBindVertexArray(0);
+  
 
 }
 

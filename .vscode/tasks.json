@@ -6,11 +6,10 @@
       "type": "shell",
       "command": "C:/msys64/mingw64/bin/g++.exe",
       "args": [
-        "Soucer Files/main.cpp",
-        "Soucer Files/Window.cpp",
-        "Soucer Files/MyScene.cpp",
+        "Soucer Files/*.cpp",
         "-o",
         "app",
+        "-mwindows",
         "-I",
         "C:/msys64/mingw64/include",
         "-I",

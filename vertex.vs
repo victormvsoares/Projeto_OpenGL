@@ -1,14 +1,18 @@
-#version 330
+#version 330 core
 
-layout (location = 0) in vec4 vPosition;
-layout (location = 1) in vec4 vColor;
+layout (location = 0) in vec3 vPosition;
+layout (location = 1) in vec3 vColor;
 
-out vec4 vertexColor;
+out vec3 vertexColor;
+
+uniform float aspect;
 
 void main()
 {
-  
-  gl_Position = vPosition;
-  vertexColor = vColor;
+    vec3 pos = vPosition;
 
+    pos.x /= aspect;
+
+    gl_Position = vec4(pos, 1.0);
+    vertexColor = vColor;
 }
